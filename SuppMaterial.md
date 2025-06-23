@@ -98,56 +98,76 @@ Elapsed time (s) to execute the function.
 
 __sfiabp.vectorial.simulation.sim__ ( npar, nfra, dtframe, dtinc, xlim, ylim , lcell, fun1p, fun2p, fundiff, isim = 0, verbose = False,  prer = prer, frame_init = frame_init )
 
-The function process the temporal evolution of npar brownian particles, that moves within a box of size xlim and ylim. To increase the speed of the simulation, the function use the cell list algorithm  with the cell dimension given by lcell. At time t = 0, the initial frame is set to frame_init or by default composed of uniformly distributed particles (x position (um), y position (um) and the orientation theta (rad)), then for each time increment dtinc, the simulation computes the next frame. A total of nfra number of frame spaced from dtframe are saved. The 1 particle function as well as the  pairwise interaction and the tensor diffusion are provided by the list of function : fun1p, fun2p and fundiff. Finally the trajectories and different parameters of the simulation are collected and return in a output dictionary.   
+The function processes the evolution of npar brownian particles, that move within a box of size $0 \leq x < xlim$ and $0 \leq y < ylim$. To increase the speed of the simulation, the function use the cell list algorithm with the cell dimension given by lcell. At time t = 0, the positions of the particle are uniformly distributed along the box, then for each time increment dtinc, the simulation computes the next frame. A total of nfra number of frame spaced by dtframe are saved. The 1-particle force as well as the  pairwise interaction and the constant matrix diffusion are provided by the list of functions : fun1p, fun2p and fundiff. Finally the trajectories and different parameters of the simulation are collected and return in a output dictionary SimData.   
 
-Parameters :
+__<pre>```PARAMETERS :```</pre>__ 
 
-npar : int 
-Number of particle which is constant during the whole simulation.  
-nfra : int 
-Number of frame to save. 
-dtframe : int
+__npar : int__
+
+The number of particles to simulate.  
+
+__nfra : int__
+
+The number of frame to save. 
+
+__dtframe : int__
+
 Time interval (s) between each frame.
-dtinc : int
+
+__dtinc : int__
+
 Time integration (s) of the simulation with the condition dtinc < dtframe. 
-xlim : int
-ylim : int
-The algorithm implements the periodic boundary conditions with the spatial boundaries 0 <= x < xlim, and 0 <= y < ylim along respectively the x and y component. 
-lcell : int
-Cell dimension which must be a divisor of both xlim and ylim.    
-fun1p : list of fun
-fun2p : list of fun 
-List of 1 and 2 particle forces. 
-fundiff : list of fun
-List of tensor diffusion.
 
-Optional Parameters :
+__xlim, ylim : int, int__
 
-isim : int 
+The algorithm implements the periodic boundary conditions with the spatial boundaries $0 \leq x < xlim$, and $0 \leq y < ylim$ along respectively the x and y components. 
+
+__lcell : int__
+
+Cell dimension which must be a common divisor of xlim and ylim.    
+
+__fun1p, fun2p : list of func, list of func__
+
+List of 1 and 2 particle forces.
+
+__fundiff : ndarray 3x3__
+
+Constant matrix diffusion.
+
+__isim : int, optional__ 
+
 A number that label the simulation and fix the seed of the random generator. 
-verbose : int 
+
+__verbose : bool, optional__ 
+
 Print information related to the progress of the computation
-prer : int
-Number of simulation step increment before saving the first frame.
 
-Returns :
+__prer : int, optional__
 
-SimData : dict
-Output dictionary that collects the results of the simulation inference. 
-See below the meaning of the different keys.
-	‘X_Raw’ : list of ndarray
+Number of simulation increment step before saving the first frame.
+
+__<pre>```RETURNS : ```</pre>__ 
+
+__SimData : dict__
+
+Output dictionary that collects the results of the simulation inference. See below the meaning of the different keys.
+
+‘X_Raw’ : list of ndarray
+
 List of frames that collect the particle trajectories over time.
-‘dtframe’ : List of ndarray
-Time interval (s) between two consecutive frames. 
-‘xframelim’ : ndarray
-‘yframelim’ : ndrarray
-Spatial boundaries (um) of the simulation. xframelim = np.array([0,xlim]) and yframelim = np.array([0,ylim]). 
-‘P’ : dict
-Parameters of the simulation.
-‘time’ : float
-Elapsed time (s) to execute the function.  
 
-    1) References
-1. J. Iwasawa, D. Nishigushi and M. Sano. Physical Review Research, 3:043104, 2021
-2. A. Frishman and P. Ronceray Physical Review X, 10(2):021009, 2020
-3. A. Poncet et al. Physical Review E, 103(1):012605, 2021
+‘dtframe’ : List of ndarray
+
+Time interval (s) between two consecutive frames. 
+
+‘xframelim’, ‘yframelim’ : sequence of int, sequence of int
+
+Spatial boundaries (\\mu m) of the simulation (xframelim = np.array([0,xlim]) and yframelim = np.array([0,ylim]) ). 
+
+‘P’ : dict
+
+Parameters of the simulation.
+
+‘time’ : float
+
+Elapsed time (s) to execute the function.  
