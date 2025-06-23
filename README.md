@@ -3,7 +3,7 @@
 The repository _sfiabp_py_ proposes to adapt the stochastic force inference (SFI) algorithm presented in [_Frishman et al. Phys. Rev. X, 10(2):021009, 2020_](url) to the analysis of 2D active polar particles. 
 It includes the main python module _sfiabp_ that contains all the required functions to perform the analysis presented in XXX as well as several tutorial scripts for an easy handling of these functions. 
 
-This document summarizes the main features of the python module _sfiabp_. The first part lists all the sub-modules and the most important functions. More details on these functions are provided inside the code. The tutorials are briefly described in the second part. For example, they illustrate the inference process with different type of basis function, the data analysis with the measure of the relevant observables and the process of new simulations to validate the inference. The tutorials are accompanied with specific data sets, that are described in the last part. 
+This document summarizes the main features of the python module _sfiabp_. The first part lists all the sub-modules and the most important functions. More details on these functions are provided in DOC.Md. The tutorials are briefly described in the second part. For example, they illustrate the inference process with different type of basis function, the data analysis with the measure of the relevant observables and the process of new simulations to validate the inference. The tutorials are accompanied with specific data sets, that are described in the last part. 
 
 _sfiabp_py_ is ditributed under the GNU Library General Public License v2.
 
