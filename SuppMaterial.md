@@ -8,7 +8,7 @@ __PARAMETERS :__
 
 __list_data : array_like__ 
 
-List of frames saved at regularly time interval. Each frame ‘i’  has the shape Npar_i x Ncor with Npar_i the particle number and Ncor = 3 the coordinates of the particle : x_pos (um), y_pos (um) and the orientation theta (rad). Optionally, the algorithm treats also the case Ncor = 4, the fourth column being the label of the particle (list of int) which is useful for experimental data, where the particle number Npar_i changes over time. 
+List of frames saved at regularly time interval. Each frame ‘i’  has the shape Npar_i x Ncor with Npar_i the particle number and Ncor = 3 the coordinates of the particle : x_pos (um), y_pos (um) and the orientation $\theta$ (rad). Optionally, the algorithm treats also the case Ncor = 4, the fourth column being the label of the particle (list of int) which is useful for experimental data, where the particle number Npar_i changes over time. 
 
 __dtframe : float__
 
