@@ -110,11 +110,11 @@ __nfra : int__
 
 The number of frame to save. 
 
-__dtframe : int__
+__dtframe : float__
 
 Time interval (s) between each frame.
 
-__dtinc : int__
+__dtinc : float__
 
 Time integration (s) of the simulation with the condition dtinc < dtframe. 
 
@@ -156,7 +156,7 @@ Output dictionary that collects the results of the simulation inference. See bel
 
 List of frames that collect the particle trajectories over time.
 
-‘dtframe’ : List of ndarray
+‘dtframe’ : float
 
 Time interval (s) between two consecutive frames. 
 
