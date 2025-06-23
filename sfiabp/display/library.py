@@ -258,8 +258,8 @@ def plotmeshVstheo(fig,axes,Sabp,dij,DicOpt):
     # err / mesh velocities vr, vtheta, omega 
     list_titles_err = ["|$v_r$-$v_{r,theo}|$","$|\\omega$-$\\omega_{theo}|$"]
     list_vmx_err = [ [-2,2], [-1,1] ]
-    for i,axi in enumerate( [fig.axes[ix] for ix in [3,6]] ):
-        pcm0 = axi.pcolormesh( tig, tjg, np.abs(Sabp['lff'][i](dij, tig_eval, tjg_eval)-lff[i](dij, tig_eval, tjg_eval)),
+    for i,(icor,axi) in enumerate( zip( [0,2], [fig.axes[ix] for ix in [3,6]] ) ):
+        pcm0 = axi.pcolormesh( tig, tjg, np.abs(Sabp['lff'][icor](dij, tig_eval, tjg_eval)-lff[icor](dij, tig_eval, tjg_eval)),
                                                                          cmap='RdBu_r', vmin=list_vmx_err[i][0], vmax=list_vmx_err[i][1] )
         cbar = fig.colorbar(pcm0)
         axi.set_title(list_titles_err[i],fontsize=ftz_mesh_title)        
