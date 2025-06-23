@@ -4,7 +4,7 @@ __sfiabp.vectorial.multicore.sfi__ ( list_data, dtframe, fun1p, fun2p, xboxlim, 
 
 The function implements the stochastic force inference algorithm applied to the inference of the forces and the diffusion of a set of identical brownian particles. The stochastic trajectories of N particles, regularly spaced by the time interval dtframe, are stored in list_data. The positions are constrained by the size of the box, xboxlim and yboxlim. To infer the 1,2 particle forces, the basis functions are specified respectively by fun1p, fun2p and once the process done, the function returns the corresponding inferred coefficients cof1p, cof2p. In addition, the function returns the constant diffusion matrix of shape 3x3 with the diagonal elements Dxx, Dyy and the rotational diffusion Dr. The estimation is done by the Vestergaard estimator. A main advantage of this function is the significant acceleration of the computation process powered by the cell method, for which the 2-particles force is taken into account only if the neighbor distance between the two particles is within a cell of size lcell. The pairwise interaction with the neighbors found outside the cell are therefore neglected. To increase the speed even more, the process is parallelized with the standard multiprocess library of python. The core number is provided by ncore.   
 
-`__PARAMETERS :__`
+__`PARAMETERS :`__
 
 __list_data : array_like__ 
 
