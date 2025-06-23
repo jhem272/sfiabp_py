@@ -51,12 +51,15 @@ __edge_filter : bol, optional__
 The filter discards the particles closed to the box edge form the statistics while taking them into account as neighbors. Indeed, these particles may be influenced by neighbors located outside the box which may biased the inference. The distance from the edge for which the filter applied is the length of lcell. The density histogram is non longer symmetric if the filter is enabled. 
 
 __strato_diff_mode : {'Vestergaard', 'ABP_Vestergaard', 'ABP_CST'}, optional__
+
 __strato_diff_matrix : ndarray 3x3, optional__
 
 In case of drift_mode = 'Stratonovich', some additional parameters must be provided. In case of ‘Vestergaard’, the full diffusion matrix is estimated by the Vestergaard estimator. In case of ‘ABP_Vestergaard’, the diffusion matrix is weighted by a boolean mask of same shape, given by strato_diff_matrix. In particular, this is useful in our study, since the the spatial diffusion can be neglected (Dxx = Dyy = 0)  but not the rotational diffusion Dr, so that the mask is np.array([[0,0,0],[0,0,0],[0,0,1]]). In the last option ‘ABP_CST’, the already known diffusion matrix is directly provided to strato_diff_matrix which accelerates the computation.
 
 __histo_mode :  boolean, optional__
+
 __histo_vecr : ndarray = np.linspace( 0,lcell, 2*lcell+1, endpoint=True)), optional__
+
 __histo_veca : ndarray = (np.pi/180)*np.linspace(0,360,36+1,endpoint=True), optional__
 
 If histo_mode enabled, compute the pair histogram in polar coordinates (r, thata_i, theta_j) in the same time of the SFI process. The radial bins (um) are delimited by histo_vecr ($\mu m$) and the angular bins (rad) by histo_veca. 
