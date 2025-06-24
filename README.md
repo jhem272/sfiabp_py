@@ -3,19 +3,29 @@
 The repository _sfiabp_py_ proposes to adapt the stochastic force inference (SFI) algorithm presented in [_Frishman et al. Phys. Rev. X, 10(2):021009, 2020_](url) to the analysis of 2D active polar particles. 
 It includes the main python module _sfiabp_ that contains all the required functions to perform the analysis presented in XXX as well as several tutorial scripts for an easy handling of these functions. 
 
-This document summarizes the main features of the python module _sfiabp_. The first part lists all the sub-modules and the most important functions. More details on these functions are provided in DOC.Md. The tutorials are briefly described in the second part. For example, they illustrate the inference process with different type of basis function, the data analysis with the measure of the relevant observables and the process of new simulations to validate the inference. The tutorials are accompanied with specific data sets, that are described in the last part. 
+This document summarizes the main features of the python module _sfiabp_. Part 1 lists all the dependencies for the good operation of the module. Part 2 lists the sub-modules and the most important functions. More details on these functions are provided in DOC.Md. Part 3 briefly describes the tutorials. For example, they illustrate the inference process with different type of basis function, the data analysis with the measure of the relevant observables and the process of new simulations to validate the inference. The tutorials are accompanied with specific data sets, that are described in the last part. 
 
 _sfiabp_py_ is ditributed under the GNU Library General Public License v2.
 
-# List of sub-modules
+# List of dependencies
+
+Please check the installation of the following packages : 
+- numpy
+- matplotlib
+- os
+- multiprocess
+- dill
+- pathos
+
+# List of sum-modules
 
 **sfiabp.vectorials** : This sub-module contains the most important functions of the program. _multicore.sfi_ to perform the SFI algorithm and _simulation.sim_, a cell list type algorithm that allows the dynamics evolution of N particles with tunable interactions. 
-The other routines ensure the good working of these two functions.
+The other routines ensure the good working of the two functions.
 
 **sfiabp.base** : A sub-module managing the different basis functions, useful for the inference or the simulation processes. 
 The important sub-module is _base2ptrigo_ and the main functions _base2ptrigo.polartrigo_,  _base2ptrigo.InitListFunc_ to generate in a easy way the trigonometric basis functions presented in the article. 
 
-**sfiabp.display** : A sub-module providing different routines to plot and manage efficiently the inference results in an interactive way. The main functions are _sfidisp_sweep_ and _sfidisp_versus_.
+**sfiabp.display** : A sub-module providing different routines to plot and manage efficiently the inference results. The main functions _sfidisp_sweep_ and _sfidisp_versus_ allow to plot the results in an interactive way. 
 
 **sfiabp.general** : A sub module providing additional functions useful for the data analysis. The sub-module _observables_ contains the functions to measure the observables discussed in the article. 
 
