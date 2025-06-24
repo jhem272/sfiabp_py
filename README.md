@@ -52,7 +52,7 @@ Unfortunately, the method is mainly limited by the maximum number of basis funct
 
 **tutorial3_flock.py** : In this tutorial, we focus on a specific data set that emulates the flock of particles and try to reproduce the observed dynamics. 
 The interactions to find are a mix between hydrodynamic force ( neutral squirmer ) and dipole-dipole interaction and in that respect, may look similar to the interactions found in experiments. 
-The synthetic data contains 5000f frames showing the dynamics of 500 particles within a periodic box of size $200x200\\ \mu m^2$.
+The synthetic data contains 5000f frames showing the dynamics of 500 particles within a periodic box of size $200 \times 200\\ \mu m^2$.
 Through this example, we illustrate different functions of the programs that can be useful for a full analysis, for example, the measurement of different observables that describe the dynamics, the inference of the forces and the comparison between the inferred trigonometric terms and the predicted ones.
 At the end, we process of a new simulation with the inferred forces and compare the properties between the new simulation and the original data (autocorrelation of polarity, video analysis).
 As a results, we show that the inferred simulation is very similar to the original one showing that the interactions have been correctly captured.
@@ -61,16 +61,16 @@ As a results, we show that the inferred simulation is very similar to the origin
 
 # Bench mark data
 
-We provide two synthetic data sets to run the tutorials (in /tutorial/data) whose main features are described below. 
+We provide two synthetic data sets to run the tutorials (/tutorial/data) whose main features are described below. 
 Both data are saved in a python dictionary as .pkl file. 
 A format that can be managed with the standard module ‘dill’.
 The different dictionary keys (dict.keys()) are the following : 
--  ’X_Raw’ : The data to infer. The format must be a list of ndarray of dimension NxDim,  with N the particle number, Dim the dimension of the coordinates equal to Dim=3 (x,y,theta). In case of experimental data set, the dimension can be Dim=4 , the fourth column being the identity of the particle given by the tracking method. If Dim=4, the particle number N can vary over time. 
+-  ’X_Raw’ : The data to infer. The format must be a list of ndarray of dimension Nfra x N x Dim,  with Nfra the frame number, N the particle number, Dim the dimension of the coordinates equal to Dim=3 $(x, y, \theta)$. In case of experimental data set, the dimension can be Dim=4 , the fourth column being the identity of the particle given by the tracking method. If Dim=4, the particle number N can vary over time. 
 - ‘dtframe’ : the time interval between two frames.
  - ‘xframlim’ and ‘yframelim’ : the size of the box.
 - ‘lcell’ : cell dimension used in case of data provided by a simulation.
 
-**Sim_1r4_npar_82_u_6_k_2000_5000f.pkl** : Simulated data presenting the dynamic of 82 self propelled particles interacting with a simple isotropic radial pair interaction of form F(r) = 2000/r**4. Active velocity  U = 6 um/s, rotational diffusion Dr  = 0.1  /s^2 and frame number Nfra = 5000 ( ‘dtframe’ = 0.1 s, ‘xframelim’ = ‘yframelim’ = [0,320] um, lcell = 20 um).
+**Sim_1r4_npar_82_u_6_k_2000_5000f.pkl** : Simulated data presenting the dynamic of 82 self propelled particles interacting with a simple isotropic radial pair interaction of form $F(r) = 2000/r^4$. Active velocity  U = 6 um/s, rotational diffusion Dr  = 0.1  /s^2 and frame number Nfra = 5000 ( ‘dtframe’ = 0.1 s, ‘xframelim’ = ‘yframelim’ = [0,320] um, lcell = 20 um).
 
 **Ominimal_model3_small_5000f.pkl** : Simulated data set presenting the dynamic of 500 flocking particles, interacting with a complex pair interaction. The analytical form is given in the notebook (tutorial3).  Active velocity U = 6 um/s, rotational diffusion Dr  = 0.1 /s^2 and frame number Nfra = 5000  ( ‘dtframe’ = 0.1 s, ‘xframelim’ = ‘yframelim’ = [0,200] um, lcell = 20 um ).
 
