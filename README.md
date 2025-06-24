@@ -58,7 +58,7 @@ Through this example, we illustrate different functions of the programs that can
 At the end, we process of a new simulation with the inferred forces and compare the properties between the new simulation and the original data (autocorrelation of polarity, video analysis).
 As a results, we show that the inferred simulation is very similar to the original one showing that the interactions have been correctly captured.
 
-**script_scalarprod1d.py, script_scalrprod3d.py** : Two addtional scripts that shows how to expand analytically an arbitrary function on a set of basis function. 
+**script_scalarprod1d.py, script_scalrprod3d.py** : Two addtional scripts to show how to expand analytically an arbitrary function on a set of basis function. 
 
 # Bench mark data
 
