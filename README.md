@@ -66,7 +66,7 @@ We provide two synthetic data sets to run the tutorials (/tutorial/data) whose m
 Both data are saved in a python dictionary as .pkl file. 
 A format that can be managed with the standard module ‘dill’.
 The different dictionary keys (dict.keys()) are the following : 
--  ’X_Raw’ : The data to infer. The format must be a list of ndarray of dimension Nfra x N x Dim,  with Nfra the frame number, N the particle number, Dim the dimension of the coordinates equal to Dim=3 $(x, y, \theta)$. In case of experimental data set, the dimension can be Dim=4 , the fourth column being the identity of the particle given by the tracking method. If Dim=4, the particle number N can vary over time. 
+-  ’X_Raw’ : The data to infer. The format must be a list of ndarray of dimension Nfra x N x Dim,  with Nfra the frame number, N the particle number, Dim the dimension of the coordinates equal to Dim=3 $(x, y, \theta)$. In case of experimental data set, the dimension can be Dim=4 , the fourth column being the label (int) of the particle given by the tracking method. If Dim=4, the particle number N can vary over time. 
 - ‘dtframe’ : the time interval between two frames.
  - ‘xframlim’ and ‘yframelim’ : the size of the box.
 - ‘lcell’ : cell dimension used in case of data provided by a simulation.
