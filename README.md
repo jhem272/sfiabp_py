@@ -11,6 +11,7 @@ _sfiabp_py_ is ditributed under the GNU Library General Public License v2.
 
 Please check the installation of the following packages : 
 - numpy
+- scipy
 - matplotlib
 - os
 - multiprocess
