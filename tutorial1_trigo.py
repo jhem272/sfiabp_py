@@ -2,10 +2,11 @@
 ##     tutorial1_trigo.py      ##
 #################################
 
-import matplotlib.pyplot as plt
 import numpy as np
 import dill
 import os
+
+import matplotlib.pyplot as plt
 
 from sfiabp.base import base
 from sfiabp.base import base2ptrigo
@@ -128,21 +129,22 @@ with open( PathOutFile, 'wb') as outp:
 ##          plot               ##
 #################################
 
-## open S dict
-if 'Sabp' not in locals():
-    with open( PathOutFile, 'rb' ) as inp:    
-        Sabp = dill.load(inp)
+# ## open S dict
+# if 'Sabp' not in locals():
+#     with open( PathOutFile, 'rb' ) as inp:    
+#         Sabp = dill.load(inp)
 
 ## we now compare the inferred results with the exact pair interactions
 # first get the analytical function
 lfftheo = function1rN(2000,4)
 # plot function
+plt.ion()
 # fig = sfidisp_sweep(SubDir, exact_fun = lfftheo, d = 3.17, rlim = [0,10], tjshift = -np.pi)
-fig = sfidisp_sweep(Sabp, exact_fun = lfftheo, d = 3.17,
-                                rlim = [0,10], tishift = 0, tjshift = -np.pi )
+fig, _ = sfidisp_sweep(Sabp, exact_fun = lfftheo, d = 3.17,
+                                rlim = [1,10], tishift = 0, tjshift = -np.pi )
 # FigManager = plt.get_current_fig_manager()
 # FigManager.full_screen_toggle()
-plt.show(block=False)
-
+plt.show(block=True)
 print('ok')
+
 

@@ -22,8 +22,12 @@ def sfidisp_sweep(Path, **kwargs):
 
     class KeyHandler:
 
-        def __init__(self,list_Sabp,DicOpt):
+        def __init__(self,fig,list_Sabp,DicOpt):
             
+            self.fig = fig
+            self.list_Sabp = list_Sabp
+            self.DicOpt = DicOpt
+
             self.glob = dict(
                 iSfile0 = 0,
                 iSfile1 = 0,
@@ -88,10 +92,10 @@ def sfidisp_sweep(Path, **kwargs):
             fig.clf()
             if self.glob['idic'] == 0: # normal display
                 # create_figure(fig,list_Sabp,lff,tishift,tjshift,d)
-                create_figure(fig,list_Sabp,self.glob,DicOpt)
+                create_figure(self.fig,self.list_Sabp,self.glob,self.DicOpt)
             elif self.glob['idic'] == 1: # mesh lff theory
                 # create_figure_vs(fig,list_Sabp,lff,tishift,tjshift,d)
-                create_figure_vs(fig,list_Sabp,self.glob,DicOpt)
+                create_figure_vs(self.fig,self.list_Sabp,self.glob,self.DicOpt)
 
     #### main ####
 
@@ -100,7 +104,7 @@ def sfidisp_sweep(Path, **kwargs):
               dijinc = kwargs.get('dijinc', 0.3),          
               tishift = kwargs.get('tishift', 0),         
               tjshift = kwargs.get('tjshift', 0),
-              rlim = kwargs.get('rlim', [0,10]),
+              rlim = kwargs.get('rlim', [1,10]),
               lff = kwargs.get('exact_fun', []),
               mask_thres = kwargs.get('mask_thres', 0),
               Prefix = kwargs.get('Prefix', '')  )
@@ -117,17 +121,18 @@ def sfidisp_sweep(Path, **kwargs):
     library.implementLff(list_Sabp,DicOpt)
     # check list_Sabp[0][0].keys()
 
-    # global index
-    keyhand = KeyHandler(list_Sabp,DicOpt)
     # intialization
     fig = plt.figure(figsize=(18,8),constrained_layout=True)
+    # global index
+    keyhand = KeyHandler(fig,list_Sabp,DicOpt)
+    # fig = plt.figure(figsize=(18,8))
     # create figure
     create_figure(fig,list_Sabp,keyhand.glob,DicOpt)
 
     fig.canvas.mpl_connect("button_press_event",keyhand.handleEvent)
     fig.canvas.mpl_connect("key_press_event",keyhand.on_press)
 
-    return fig
+    return fig, keyhand
     
 
 ###########################
@@ -147,19 +152,32 @@ def create_figure(fig,list_Sabp,glob,DicOpt):
 
     #### structure ####
 
-    gs = fig.add_gridspec(3,3,width_ratios=[0.3,0.9,0.8],height_ratios=[0.15,1,0.03])
+    gs = fig.add_gridspec(3,5,width_ratios=[0.04,0.3,0.9,0.8,0.04],height_ratios=[0.15,1,0.05])
     
-    gs10 = gs[1,0].subgridspec(3,1)
+    gs10 = gs[1,1].subgridspec(3,1)
     for i in range(3):
         fig.add_subplot(gs10[i])
-    gs11 = gs[1,1].subgridspec(2,2)
+    gs11 = gs[1,2].subgridspec(2,2)
     for i in range(2):
         for j in range(2):
             fig.add_subplot(gs11[i,j])
-    gs12 = gs[1,2].subgridspec(3,2)
+    gs12 = gs[1,3].subgridspec(3,2)
     for i in range(3):
         for j in range(2):
             fig.add_subplot(gs12[i,j])
+
+    # gs = fig.add_gridspec(3,3,width_ratios=[0.3,0.9,0.8],height_ratios=[0.15,1,0.03])
+    # gs10 = gs[1,0].subgridspec(3,1)
+    # for i in range(3):
+    #     fig.add_subplot(gs10[i])
+    # gs11 = gs[1,1].subgridspec(2,2)
+    # for i in range(2):
+    #     for j in range(2):
+    #         fig.add_subplot(gs11[i,j])
+    # gs12 = gs[1,2].subgridspec(3,2)
+    # for i in range(3):
+    #     for j in range(2):
+    #         fig.add_subplot(gs12[i,j])
 
     # format_axes(fig)
 
@@ -212,7 +230,7 @@ def create_figure(fig,list_Sabp,glob,DicOpt):
     ax.set_aspect('equal')
     ax.axis('off')
                        
-    fig.text(0.01,0.45,("$\\theta_i$=%.2f"%(thetai)+"\n"
+    fig.text(0.02,0.45,("$\\theta_i$=%.2f"%(thetai)+"\n"
                 "$\\theta_j$=%.2f"%(thetaj)+"\n"
                 "$v_r$=%.2f"%(Sabp['lff'][0](dij,thetai,thetaj))+"\n"
                 "$v_\\theta$=%.2f"%(Sabp['lff'][1](dij,thetai,thetaj))+"\n"
@@ -284,24 +302,6 @@ def format_axes(fig):
     for i, ax in enumerate(fig.axes):
         ax.text(0.5, 0.5, "ax%d" % (i+1), va="center", ha="center")
         ax.tick_params(labelbottom=False, labelleft=False)
-
-
-# gs12, ax7, phi cof vr
-def gs12_create_phicof(ax,cof2p,ftz_title):
-    ax.plot(np.abs(cof2p.flatten()),'o',markersize=4,markerfacecolor='none')
-    ax.set_yscale('log')
-    ax.set_ylim(1e-1,1e4)
-    ax.set_xlabel('num')
-    ax.set_title('|basis coefficients|',fontsize=ftz_title)  
-
-
-# gs12, ax8, tikonov info
-def gs12_create_tikolshape(ax,inverse_mode,ftz_title):
-    ax.loglog(inverse_mode['list_alpha'],inverse_mode['nx'],'o-',label='nx',markersize=4)
-    ax.loglog(inverse_mode['list_alpha'],inverse_mode['na'],'o-',label='na',markersize=4)
-    ax.set_xlabel('$\\alpha$')
-    ax.set_title('norm(x),norm(ax-b)',fontsize=ftz_title)
-    ax.legend(ncol=2,loc='upper right',frameon=False,fontsize=9)
 
 
 def pol2cart_janus( lff, r, thetai, thetaj, dt=1, rplt=2 ): # um, rad, rad

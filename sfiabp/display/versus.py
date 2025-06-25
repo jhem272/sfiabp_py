@@ -20,7 +20,12 @@ def sfidisp_versus(PathFolder1, PathFolder2, **kwargs):
     #### function events ####
 
     class KeyHandler:
-        def __init__(self,list_Sabp1,list_Sabp2,DicOpt):
+        def __init__(self,fig,list_Sabp1,list_Sabp2,DicOpt):
+            
+            self.fig = fig
+            self.list_Sabp1 = list_Sabp1
+            self.list_Sabp2 = list_Sabp2
+            self.DicOpt = DicOpt 
 
             self.glob = dict(
                 iS1file0 = 0,
@@ -86,7 +91,7 @@ def sfidisp_versus(PathFolder1, PathFolder2, **kwargs):
 
         def refresh_figure(self):
             fig.clf()
-            create_figure(fig,list_Sabp1,list_Sabp2,self.glob,DicOpt)
+            create_figure(self.fig,self.list_Sabp1,self.list_Sabp2,self.glob,self.DicOpt)
 
     #### main ####
 
@@ -95,7 +100,7 @@ def sfidisp_versus(PathFolder1, PathFolder2, **kwargs):
               dijinc = kwargs.get('dijinc', 0.3),          
               tishift = kwargs.get('tishift', 0),         
               tjshift = kwargs.get('tjshift', 0),
-              rlim = kwargs.get('rlim', [0,10]),
+              rlim = kwargs.get('rlim', [1,10]),
               mask_thres = kwargs.get('mask_thres', 0), 
               Prefix = kwargs.get('Prefix', '') )
     
@@ -108,17 +113,17 @@ def sfidisp_versus(PathFolder1, PathFolder2, **kwargs):
     library.implementLff(list_Sabp1,DicOpt)
     library.implementLff(list_Sabp2,DicOpt)
 
-    # global index
-    keyhand = KeyHandler(list_Sabp1,list_Sabp2,DicOpt)
     # intialization
     fig = plt.figure(figsize=(18,8),constrained_layout=True)
+    # global index
+    keyhand = KeyHandler(fig,list_Sabp1,list_Sabp2,DicOpt)
     # create figure
     create_figure(fig,list_Sabp1,list_Sabp2,keyhand.glob,DicOpt)
 
     fig.canvas.mpl_connect("button_press_event",keyhand.handleEvent)
     fig.canvas.mpl_connect("key_press_event",keyhand.on_press)
     
-    print('ok')
+    return fig, keyhand
 
 
 ###########################
@@ -145,15 +150,25 @@ def create_figure(fig,list_Sabp1,list_Sabp2,glob,DicOpt):
 
     #### structure ####
 
-    gs = fig.add_gridspec(3,2,height_ratios=[0.15,1,0.05],width_ratios=[1,0.6])
-    gs10 = gs[1,0].subgridspec(2,3)
+    gs = fig.add_gridspec(3,4,height_ratios=[0.17,1,0.05],width_ratios=[0.03,1,0.6,0.03])
+    gs10 = gs[1,1].subgridspec(2,3)
     for i in range(2):
         for j in range(3):
             fig.add_subplot(gs10[i,j])
-    gs11 = gs[1,1].subgridspec(3,2)
+    gs11 = gs[1,2].subgridspec(3,2)
     for i in range(3):
         for j in range(2):
             fig.add_subplot(gs11[i,j])
+
+    # gs = fig.add_gridspec(3,2,height_ratios=[0.15,1,0.05],width_ratios=[1,0.6])
+    # gs10 = gs[1,0].subgridspec(2,3)
+    # for i in range(2):
+    #     for j in range(3):
+    #         fig.add_subplot(gs10[i,j])
+    # gs11 = gs[1,1].subgridspec(3,2)
+    # for i in range(3):
+    #     for j in range(2):
+    #         fig.add_subplot(gs11[i,j])
 
     # format_axes(fig)
 
@@ -171,15 +186,15 @@ def create_figure(fig,list_Sabp1,list_Sabp2,glob,DicOpt):
     
     ## text
     ftz_txt = 9.5 # fontsize text
-    fig.text(0.01,0.89,("$\\bf{sfidisp\\_versus.py}$\n" 
+    fig.text(0.02,0.88,("$\\bf{sfidisp\\_versus.py}$\n" 
                          "- press a, e to change the distance r\n"
                          "- click on the 2D mesh to change $\\theta_1$, $\\theta_2$\n"
                          "- press p,m for dim0 and l,ù for dim1 to change list_S1[dim0][dim1]\n"
                          "- press 8,5 for dim0 and 4,6 for dim1 to change list_S2[dim0][dim1]\n"
                          "- press q to quit"), fontsize=ftz_txt-1.3, linespacing=1.2)
 
-    txtidentity( fig, 0.23, 0.896, 1, Sabp1, glob['iS1file0'], glob['iS1file1'], ftz_txt )
-    txtidentity( fig, 0.62, 0.896, 2, Sabp2, glob['iS2file0'], glob['iS2file1'], ftz_txt )
+    txtidentity( fig, 0.25, 0.889, 1, Sabp1, glob['iS1file0'], glob['iS1file1'], ftz_txt )
+    txtidentity( fig, 0.64, 0.889, 2, Sabp2, glob['iS2file0'], glob['iS2file1'], ftz_txt )
 
     
 ###########################

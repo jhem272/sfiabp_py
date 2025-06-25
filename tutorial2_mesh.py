@@ -132,13 +132,13 @@ lfftheo = function1rN(2000,4)
 # graph by removing results with poor statistics.
 mask_thres = 100
 # plot tutorial
+plt.ion()
 # fig = sfidisp_sweep(SubDir, exact_fun = lfftheo, d = 3.17, rlim = [0,10],
 #                                    tishift=0, tjshift = -np.pi, mask_thres = mask_thres, Prefix = 'S_' )
-fig = sfidisp_versus(SubDir, SubDir, d = 3.17, rlim = [0,10], 
+fig, _ = sfidisp_versus(SubDir, SubDir, d = 3.17, rlim = [1,10], 
                                      tishift=0, tjshift = -np.pi, mask_thres = mask_thres, Prefix = 'S_' )
-FigManager = plt.get_current_fig_manager()
-FigManager.full_screen_toggle()
-plt.show(block=False)
-
+# FigManager = plt.get_current_fig_manager()
+# FigManager.full_screen_toggle()
+plt.show(block=True)
 print('ok')
 
