@@ -23,7 +23,7 @@ PathDataFile = ('tutorial/data/Sim_1r4_npar_82_u_6_k_2000_5000f.pkl')
 # starting frame 
 istar = 0
 # number of frame 
-nfra = 1000
+nfra = 200
 # get the data
 with open( PathDataFile, 'rb' ) as inp:    
     data0 = dill.load(inp)
@@ -61,7 +61,7 @@ if basis_name == 'Trigo':
     def active_perp(U = 1): # perpendicular active velocity
         return lambda X : np.array([ U * np.sin(X[2]), -U * np.cos(X[2]),0])
     fun1p = [ cstx(), csty(), active(), active_perp() ]
-    # note fun1p also accept the concatenated function base.stdfun1p(), such as fun1p = [ base.stdfun1p() ] 
+    # note fun1p also accepts the concatenated function base.stdfun1p(), such as fun1p = [ base.stdfun1p() ] 
     #fun1p = [ base.stdfun1p() ] 
     ## 2 particles force
     # Order, FuncRad, VectorRad
@@ -88,7 +88,7 @@ SubDir = 'tutorial/tuto1'
 os.makedirs(SubDir,exist_ok=True)
 # output file
 PathOutFile = SubDir + '/'  + 'S_%s_'%(basis_name) + os.path.basename(PathDataFile)[:-4] + \
-                    '_%s_%s_Gwn_%d_Order_%d_%df.pkl' % (drift_mode[0:6],inverse_mode['name'],stdGWN,Order,nfra)
+                    '_%s_%s_Gwn_%d_Order_%d_%04df.pkl' % (drift_mode[0:6],inverse_mode['name'],stdGWN,Order,nfra)
 
 #################################
 ##                             ##
@@ -98,7 +98,7 @@ PathOutFile = SubDir + '/'  + 'S_%s_'%(basis_name) + os.path.basename(PathDataFi
 cof1p, cof2p, D_average, psfi = multicore.sfi(list_data,dtframe,fun1p,fun2p,xboxlim,yboxlim,lcell,ncore,
                                                     drift_mode=drift_mode,inverse_mode=inverse_mode,histo_mode=True,verbose=True)
 
-# the inferred coefficients cof1p, cof2p has same structures as fun1p, fun2p
+# the inferred coefficients cof1p, cof2p have same structures as fun1p, fun2p
 # so the inferred active velocity is cof1p[2][0] and the coefficients for 
 # the pair interaction are given by cof2p[0]
 Dr = D_average[2,2]
@@ -108,7 +108,7 @@ print("inferred active velocity, U=",active_vel)
 
 # In our case, we create a specific container 'Sabp' dict
 # to collect all the relevant results of the test.
-# The plotting functions sfiabp/display/ works with this container.
+# The plotting function sfiabp/display/ works with this container.
 
 Sabp = dict( cof1p = cof1p, cof2p = cof2p,
              active_vel = active_vel,
@@ -139,9 +139,9 @@ with open( PathOutFile, 'wb') as outp:
 lfftheo = function1rN(2000,4)
 # plot function
 plt.ion()
-# fig = sfidisp_sweep(SubDir, exact_fun = lfftheo, d = 3.17, rlim = [0,10], tjshift = -np.pi)
-fig, _ = sfidisp_sweep(Sabp, exact_fun = lfftheo, d = 3.17,
-                                rlim = [1,10], tishift = 0, tjshift = -np.pi )
+# fig = sfidisp_sweep(Sabp, exact_fun = lfftheo, d = 3.17, rlim = [0,10], tjshift = -np.pi)
+fig, _ = sfidisp_sweep(SubDir, exact_fun = lfftheo, d = 3.17,
+                                rlim = [1,10], tishift = 0, tjshift = -np.pi, Prefix = 'S_' )
 # FigManager = plt.get_current_fig_manager()
 # FigManager.full_screen_toggle()
 plt.show(block=True)

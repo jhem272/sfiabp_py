@@ -107,7 +107,7 @@ def print_report(Sabp, PathSFile=''):
     print('Frame range : ',Sabp['iid'])
     print('Basis name:',Sabp['basis_name'])
     if Sabp['basis_name'] == 'Trigo':
-        print('Active velocity (um/s) : ',Sabp['cof1p'][0][2])
+        print('Active velocity (um/s) : ',Sabp['active_vel'])
         print('Rotational Diffusion (/s) : ',Sabp['D_average'][2,2])
         print('Order:',Sabp['Order'])
         print('FuncRad:',Sabp['FuncRad'])
