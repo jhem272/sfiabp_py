@@ -5,7 +5,7 @@ It includes the main python module _sfiabp_ that contains all the required funct
 
 This document summarizes the main features of the python module _sfiabp_. Part 1 lists all the dependencies for the good operation of the module. Part 2 lists the sub-modules and the most important functions. More details on these functions are provided in DOC.Md. Part 3 briefly describes the tutorials. For example, they illustrate the inference process with different type of basis function, the data analysis with the measure of the relevant observables and the process of new simulations to validate the inference. The tutorials are accompanied with specific data sets, that are described in the last part. 
 
-_sfiabp_py_ is ditributed under the GNU Library General Public License v2.
+_sfiabp_py_ is distributed under the GNU Library General Public License v2.
 
 # List of dependencies
 
