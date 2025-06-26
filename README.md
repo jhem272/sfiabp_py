@@ -51,12 +51,12 @@ For this we provide the grid in polar coordinates $(r, \theta_1, \theta_2)$ and 
 After the SFI process is done, we compare the inferred results with the theoretical prediction. 
 Unfortunately, the method is mainly limited by the maximum number of basis functions that the computer can handle (about 1000-1500).
 
-**tutorial3_flock.py** : In this tutorial, we focus on a specific data set that emulates the flock of particles and try to reproduce the observed dynamics. 
+**tutorial3_flock.py, tutorial4_obs.py** : In these tutorials, we focus on a specific data set that emulates the flock of particles and try to reproduce the observed dynamics. 
 The interactions to find are a mix between hydrodynamic force ( neutral squirmer ) and dipole-dipole interaction and in that respect, may look similar to the interactions found in experiments. 
 The synthetic data contains 5000f frames showing the dynamics of 500 particles within a periodic box of size $200 \times 200\\ \mu m^2$.
 Through this example, we illustrate different functions of the programs that can be useful for a full analysis, for example, the measurement of different observables that describe the dynamics, the inference of the forces and the comparison between the inferred trigonometric terms and the predicted ones.
 At the end, we process of a new simulation with the inferred forces and compare the properties between the new simulation and the original data (autocorrelation of polarity, video analysis).
-As a results, we show that the inferred simulation is very similar to the original one showing that the interactions have been correctly captured.
+As a result, we show that the inferred simulation is very similar to the original one showing that the interactions have been correctly captured.
 
 **script_scalarprod1d.py, script_scalrprod3d.py** : Two addtional scripts to show how to expand analytically an arbitrary function on a set of basis function. 
 
