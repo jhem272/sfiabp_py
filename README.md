@@ -33,8 +33,8 @@ The important sub-module is _base2ptrigo_ and the main functions _base2ptrigo.po
 # List of the tutorials
 
 **tutorial1_trigo.py** : In this tutorial, we show a basic illustration of the SFI (stochastic force inference) method and its related function _vectorial.multicore.sfi_, applied to a synthetic data set, composed of 82 self propelled particles with a simple isotropic radial pair interaction. 
-To run the function, one important argument to provide is the basis functions. In our case,  the basis for the 1 particle force is given simply by the unitary active velocity  $(V_x, V_y) = (cos(\theta), sin(\theta))$, with \theta being the angular orientation of the particle. 
-The basis for the 2 particle forces is the set of trigonometric functions described in the article, which are provided by the function _base2ptrigo.polar_trigo_. The three parameters to enter are : (1) the type of radial functions ( by default FuncRad = ‘PolyExp’ for  Polynomial-exponential function ), (2) the span of the radial functions VectorRad indicating the center of each functions and (3) the trigonometric order n=0,1,2….
+To run the function, one important argument to provide is the basis functions. In our case,  the basis for the 1 particle interaction is given simply by the unitary active velocity  $(V_x, V_y) = (cos(\theta), sin(\theta))$, with $\theta$ being the angular orientation of the particle. 
+The basis for the 2 particle interaction is the set of trigonometric functions described in the article, which are provided by the function _base2ptrigo.polar_trigo_. The three parameters to enter are : (1) the type of radial functions ( by default FuncRad = ‘PolyExp’ for  Polynomial-exponential function ), (2) the span of the radial functions VectorRad indicating the center of each functions and (3) the trigonometric order n=0,1,2….
 An optional argument is the choice of the internal method for processing the drift.  
 The recommended and default method, used in this article, is the ‘Stratonovich’ mode which is the unbiased method, robust against diffusion and error noises. 
 It reduces significantly the number of frame required, but at the same time increases, the time to process a single frame. 
@@ -52,13 +52,13 @@ After the SFI process is done, we compare the inferred results with the theoreti
 Unfortunately, the method is mainly limited by the maximum number of basis functions that the computer can handle (about 1000-1500).
 
 **tutorial3_flock.py, tutorial4_obs.py** : In these tutorials, we focus on a specific data set that emulates the flock of particles and try to reproduce the observed dynamics. 
-The interactions to find are a mix between hydrodynamic force ( neutral squirmer ) and dipole-dipole interaction and in that respect, may look similar to the interactions found in experiments. 
-The synthetic data contains 5000f frames showing the dynamics of 500 particles within a periodic box of size $200 \times 200\\ \mu m^2$.
+The interactions to find are a mix between hydrodynamic interaction ( neutral squirmer ) and dipole-dipole interaction and in that respect, may look similar to the interactions found in experiments. 
+The synthetic data contains 5000 frames showing the dynamics of 500 particles within a periodic box of size $200 \times 200\\ \mu m^2$.
 Through this example, we illustrate different functions of the programs that can be useful for a full analysis, for example, the measurement of different observables that describe the dynamics, the inference of the forces and the comparison between the inferred trigonometric terms and the predicted ones.
 At the end, we process of a new simulation with the inferred forces and compare the properties between the new simulation and the original data (autocorrelation of polarity, video analysis).
 As a result, we show that the inferred simulation is very similar to the original one showing that the interactions have been correctly captured.
 
-**script_scalarprod1d.py, script_scalrprod3d.py** : Two addtional scripts to show how to expand analytically an arbitrary function on a set of basis function. 
+**script_scalarprod1d.py, script_scalrprod3d.py** : Two addtional scripts to show how to expand analytically an arbitrary function on a set of basis functions. 
 
 # Bench mark data
 
